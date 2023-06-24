@@ -9,7 +9,7 @@ const wasmSolver = require('../wasmSolver');
 
 module.exports = class Game {
     constructor(config) {
-        if(!config.username) throw new Error('Please provide a username.');
+        if (!config.username) throw new Error('Please provide a username.');
 
         this.group = null;
 

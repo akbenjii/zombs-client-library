@@ -1,12 +1,12 @@
 'use strict';
 
-const { PACKET } = require('../../Enumerations');
-const { WebSocket } = require('ws');
+const {PACKET} = require('../../Enumerations');
+const {WebSocket} = require('ws');
 
 const BinCodec = require('./Codec');
 const EventEmitter = require('events');
 
-const { getRandomUserAgent } = require('../../Utilities/randomUserAgent');
+const {getRandomUserAgent} = require('../../Utilities/randomUserAgent');
 
 module.exports = class BinNetworkAdapter {
     constructor(currentGame) {
@@ -135,7 +135,7 @@ module.exports = class BinNetworkAdapter {
         this.pingCompletion = now;
     }
 
-    onConnectionStart({ extra }) {
+    onConnectionStart({extra}) {
         this.sendEnterWorld({
             displayName: 'benji',
             extra

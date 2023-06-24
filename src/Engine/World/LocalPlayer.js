@@ -4,6 +4,7 @@ module.exports = class LocalPlayer {
     constructor(currentGame) {
         this.currentGame = currentGame;
     }
+
     setEntity(entity) {
         this.entity = entity;
     }

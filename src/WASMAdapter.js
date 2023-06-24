@@ -50,7 +50,8 @@ module.exports = class WASMAdapter {
         }, _0x9ca036 = 1; _0x9ca036 <= 4; _0x9ca036 *= 2) {
             var _0x46ee00 = _0x3df9cc * (1 + 0.2 / _0x9ca036);
             _0x46ee00 = Math.min(_0x46ee00, a + 100663296);
-            var _0x24dcd5 = Math.min(_0x8925b5, _0x2b4b15(Math.max(a, _0x46ee00), 65536)), _0x2833bd = _0x16c459(_0x24dcd5);
+            var _0x24dcd5 = Math.min(_0x8925b5, _0x2b4b15(Math.max(a, _0x46ee00), 65536)),
+                _0x2833bd = _0x16c459(_0x24dcd5);
             if (_0x2833bd)
                 return !0;
         }
@@ -324,8 +325,11 @@ module.exports = class WAssembly {
 
         this.HEAP32[(alloc >> 2) + length] = 0x0;
 
-        try { this._main(length, alloc) }
-        catch (e) { logger.error(`WAssembly._main caught error : ${e.stack.toString()}`) }
+        try {
+            this._main(length, alloc)
+        } catch (e) {
+            logger.error(`WAssembly._main caught error : ${e.stack.toString()}`)
+        }
     }
 
     #instantiateHeap(buffer) {

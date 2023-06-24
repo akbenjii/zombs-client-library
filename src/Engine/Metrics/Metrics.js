@@ -3,7 +3,7 @@
 module.exports = class Metrics {
     constructor(currentGame) {
         this.currentGame = currentGame;
-        
+
         this.msElapsedSinceMetricsSent = 0;
         this.metrics = null;
         this.pingSum = 0;
@@ -41,10 +41,10 @@ module.exports = class Metrics {
 
     getFramesExtrapolated() {
         if ('framesExtrapolated' in this.metrics) return this.metrics['framesExtrapolated'];
-        
+
         return 0;
     }
-    
+
     reset() {
         this.pingSum = 0;
         this.pingSamples = 0;
@@ -78,7 +78,7 @@ module.exports = class Metrics {
             differenceInClientTime: 0
         };
     }
-    
+
     updateMetrics() {
         if (!this.currentGame.world.getReplicator().isFpsReady())
             return false;
@@ -141,6 +141,7 @@ module.exports = class Metrics {
 
         return true;
     };
+
     sendMetrics() {
         if (this.msElapsedSinceMetricsSent < 5000) return;
 

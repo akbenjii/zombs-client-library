@@ -201,7 +201,8 @@ module.exports = class Replication {
             }
             if (this.serverTime - this.shiftedGameTime < this.ping) {
                 this.ticksDesynced++;
-                if (this.ticksDesynced >= 10) {}
+                if (this.ticksDesynced >= 10) {
+                }
             }
         }
     }

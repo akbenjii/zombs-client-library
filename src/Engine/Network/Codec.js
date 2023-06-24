@@ -1,6 +1,6 @@
 'use strict';
 
-const { ATTRIBUTE_TYPE, PARAMETER_TYPE, PACKET } = require('../../Enumerations');
+const {ATTRIBUTE_TYPE, PARAMETER_TYPE, PACKET} = require('../../Enumerations');
 const ByteBuffer = require('bytebuffer');
 
 module.exports = class BinCodec {
@@ -109,7 +109,7 @@ module.exports = class BinCodec {
         for (let i = 0; i < 64; i++)
             extraData[i] = this.currentGame.wasmmer.HEAPU8[BlendField + i];
 
-        return { extra };
+        return {extra};
     }
 
     decodeEnterWorldResponse(buffer) {
@@ -223,9 +223,9 @@ module.exports = class BinCodec {
                 if (!(uid in this.removedEntities))
                     newEntityTable.push(uid);
             }
-            newEntityTable.sort(function(a, b) {
+            newEntityTable.sort(function (a, b) {
                 if (a < b) return -1;
-                if (a > b)  return 1;
+                if (a > b) return 1;
 
                 return 0;
             });
@@ -250,7 +250,7 @@ module.exports = class BinCodec {
             const attributeMap = this.attributeMaps[entityType];
             for (let tableIndex = 0; tableIndex < this.sortedUidsByType[entityType].length; tableIndex++) {
                 const uid = this.sortedUidsByType[entityType][tableIndex];
-                const player = { uid: uid };
+                const player = {uid: uid};
 
                 if ((this.absentEntitiesFlags[Math.floor(tableIndex / 8)] & (1 << (tableIndex % 8))) !== 0) {
                     entityUpdateData.entities[uid] = true;

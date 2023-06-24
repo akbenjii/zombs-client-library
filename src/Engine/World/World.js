@@ -7,7 +7,7 @@ const LocalPlayer = require('./LocalPlayer');
 module.exports = class World {
     constructor(currentGame) {
         this.currentGame = currentGame;
-        
+
         this.entities = {};
         this.inWorld = false;
         this.myUid = null;
