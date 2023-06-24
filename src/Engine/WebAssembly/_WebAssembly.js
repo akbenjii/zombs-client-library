@@ -42,8 +42,8 @@ module.exports = class _WebAssembly {
 
         if (check.startsWith('typeof window === "undefined"')) return 0;
         if (check.startsWith("typeof process !== 'undefined'")) return 0;
-        if (check.startsWith("Game.currentGame.network.connected ? 1 : 0")) return 1;
-        if (check.startsWith('Game.currentGame.world.myUid === null ? 0 : Game.currentGame.world.myUid')) return 0;
+        if (check.startsWith("Game.currentGame.network.connected")) return 1;
+        if (check.startsWith('Game.currentGame.world.myUid === null')) return 0;
         if (check.startsWith('document.getElementById("hud").children.length')) return 24;
     }
 
