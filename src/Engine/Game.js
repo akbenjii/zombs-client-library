@@ -32,7 +32,9 @@ module.exports = class Game {
         this._WebAssembly = new _WebAssembly(this);
         await this._WebAssembly.init();
 
-        this.renderer.update();
+        this.network.addEnterWorldHandler(() => {
+            this.renderer.update();
+        });
     }
 
     getNetworkEntityPooling() {
