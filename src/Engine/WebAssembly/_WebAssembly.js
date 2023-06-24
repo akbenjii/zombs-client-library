@@ -51,15 +51,17 @@ module.exports = class _WebAssembly {
         return this.window.performance.now();
     }
 
+    #noop() {}
+
     async init() {
         const imports = {
             a: {
                 a: (...args) => this.#a_a(...args),
                 b: (...args) => this.#a_b(...args),
                 c: (...args) => this.#a_c(...args),
-                d: (...args) => () => { /* logger.error('[FATAL] WebAssembly Error.') */ },
-                e: (...args) => () => {},
-                f: (...args) => () => {}
+                d: (...args) => this.#noop(),
+                e: (...args) => this.#noop(),
+                f: (...args) => this.#noop()
             }
         }
 
