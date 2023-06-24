@@ -172,8 +172,6 @@ module.exports = class World {
         const entity = this.entities[uid];
         const model = entity.currentModel;
 
-        this.renderer.remove(this.entities[uid]);
-
         if (this.currentGame.getModelEntityPooling(model.modelName)) {
             model.reset();
             this.modelEntityPool[model.modelName].push(model);
