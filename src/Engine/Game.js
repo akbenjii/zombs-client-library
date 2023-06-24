@@ -3,6 +3,7 @@
 const World = require('./World/World');
 const Renderer = require('./Renderer/Renderer');
 const BinNetworkAdapter = require('./Network/NetworkAdapter');
+const Metrics = require('./Metrics/Metrics');
 
 const wasmSolver = require('../wasmSolver');
 
@@ -18,6 +19,7 @@ module.exports = class Game {
         this.network = new BinNetworkAdapter(this);
         this.renderer = new Renderer(this);
         this.world = new World(this);
+        this.metrics = new Metrics(this);
     }
 
     async preload() {
