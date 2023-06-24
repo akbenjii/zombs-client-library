@@ -26,13 +26,13 @@ module.exports = class BinNetworkAdapter {
         this.addConnectHandler(this.sendPingIfNecessary.bind(this));
         this.addPingHandler(this.onPing.bind(this));
 
-        this.emitter.on('connected', function(event) {
+        this.emitter.on('connected', event => {
             //logger.debug('Successfully connected to Websocket: ', event);
             this.connecting = false;
             this.connected = true;
         });
 
-        this.emitter.on('close', function(event) {
+        this.emitter.on('close', event => {
             //logger.debug('Websocket connection has been closed: ', event);
 
             this.connecting = false;
@@ -165,33 +165,33 @@ module.exports = class BinNetworkAdapter {
     }
 
     addPreEnterWorldHandler(callback) {
-        this.addPacketHandler(PACKET.PRE_ENTER_WORLD, preEnterWorldPacket => {
-            callback(preEnterWorldPacket);
+        this.addPacketHandler(PACKET.PRE_ENTER_WORLD, packet => {
+            callback(packet);
         });
     }
 
     addEnterWorldHandler(callback) {
-        this.addPacketHandler(PACKET.ENTER_WORLD, function(response) {
-            callback(response);
+        this.addPacketHandler(PACKET.ENTER_WORLD, packet => {
+            callback(packet);
         });
     }
 
     addEntityUpdateHandler(callback) {
-        this.addPacketHandler(PACKET.ENTITY_UPDATE, function(response) {
-            callback(response);
+        this.addPacketHandler(PACKET.ENTITY_UPDATE, packet => {
+            callback(packet);
         });
     }
 
     addPingHandler(callback) {
-        this.addPacketHandler(PACKET.PING, function(response) {
+        this.addPacketHandler(PACKET.PING, response => {
             callback(response);
         });
     }
 
     addRpcHandler(rpc, callback) {
-        this.addPacketHandler(PACKET.RPC, function(response) {
-            if (rpc === response.name)
-                return callback(response.response);
+        this.addPacketHandler(PACKET.RPC, rpc => {
+            if (rpc === rpc.name)
+                return callback(rpc.response);
         });
     }
 
