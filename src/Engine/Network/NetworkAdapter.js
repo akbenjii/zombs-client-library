@@ -3,12 +3,12 @@
 const {PACKET} = require('../../Enumerations');
 const {WebSocket} = require('ws');
 
-const BinCodec = require('./Codec');
+const Codec = require('./Codec');
 const EventEmitter = require('events');
 
 const {getRandomUserAgent} = require('../../Utilities/randomUserAgent');
 
-module.exports = class BinNetworkAdapter {
+module.exports = class NetworkAdapter {
     constructor(currentGame) {
         this.currentGame = currentGame;
         this.ping = 0;
@@ -19,7 +19,7 @@ module.exports = class BinNetworkAdapter {
         this.connected = false;
         this.connecting = false;
 
-        this.codec = new BinCodec(currentGame);
+        this.codec = new Codec(currentGame);
         this.emitter = new EventEmitter();
 
         this.emitter.setMaxListeners(50);

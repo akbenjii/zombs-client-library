@@ -2,7 +2,7 @@
 
 const World = require('./World/World');
 const Renderer = require('./Renderer/Renderer');
-const BinNetworkAdapter = require('./Network/NetworkAdapter');
+const NetworkAdapter = require('./Network/NetworkAdapter');
 const Metrics = require('./Metrics/Metrics');
 
 const _WebAssembly = require('./WebAssembly/_WebAssembly');
@@ -17,7 +17,7 @@ module.exports = class Game {
         this.modelEntityPooling = {};
         this.networkEntityPooling = false;
 
-        this.network = new BinNetworkAdapter(this);
+        this.network = new NetworkAdapter(this);
         this.renderer = new Renderer(this);
         this.world = new World(this);
         this.metrics = new Metrics(this);

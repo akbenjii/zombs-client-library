@@ -3,7 +3,7 @@
 const {ATTRIBUTE_TYPE, PARAMETER_TYPE, PACKET} = require('../../Enumerations');
 const ByteBuffer = require('bytebuffer');
 
-module.exports = class BinCodec {
+module.exports = class Codec {
     constructor(currentGame) {
         this.currentGame = currentGame;
 
