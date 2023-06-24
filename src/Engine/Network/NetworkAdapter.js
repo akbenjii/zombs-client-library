@@ -52,7 +52,7 @@ module.exports = class NetworkAdapter {
     }
 
     connect(options) {
-        if(!this.currentGame.preloaded) return throw new Error('[FATAL] please asynchronously call Game.prototype.preload before trying to connect');
+        if(!this.currentGame.preloaded) throw new Error('[FATAL] please asynchronously call Game.prototype.preload before trying to connect');
         this.connectionOptions = options;
 
         this.connected = false;
