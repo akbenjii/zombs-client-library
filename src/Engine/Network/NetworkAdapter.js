@@ -10,6 +10,7 @@ const {getRandomUserAgent} = require('../../Utilities/randomUserAgent');
 
 module.exports = class BinNetworkAdapter {
     constructor(currentGame) {
+        this.currentGame = currentGame;
         this.ping = 0;
 
         this.pingStart = null;
@@ -137,7 +138,7 @@ module.exports = class BinNetworkAdapter {
 
     onConnectionStart({extra}) {
         this.sendEnterWorld({
-            displayName: 'benji',
+            displayName: this.currentGame.config.username,
             extra
         });
     }
