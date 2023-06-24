@@ -34,8 +34,6 @@ module.exports = class Metrics {
 
             if (!this.updateMetrics()) return;
             this.sendMetrics();
-
-            console.log('gang')
         });
     }
 

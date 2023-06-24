@@ -20,6 +20,7 @@ module.exports = class Renderer {
     update() {
         if (!this.firsrPerformance) {
             this.firsrPerformance = performance.now();
+            setImmediate(this.update.bind(this));
             return;
         }
 
@@ -36,5 +37,7 @@ module.exports = class Renderer {
             //logger.error(`Failed to execute tick callbacks: ${e}`)
             console.log(e.stack)
         }
+
+        setImmediate(this.update.bind(this));
     }
 }
