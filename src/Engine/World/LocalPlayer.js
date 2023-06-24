@@ -22,7 +22,7 @@ module.exports = class LocalPlayer {
         return target.partyId;
     }
 
-    setTargetTick = function(tick) {
+    setTargetTick(tick) {
         //this.currentGame.ui.setPlayerTick(tick);
     }
 }
