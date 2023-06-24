@@ -21,9 +21,13 @@ module.exports = class Game {
         this.renderer = new Renderer(this);
         this.world = new World(this);
         this.metrics = new Metrics(this);
+
+        this.preloaded = false;
     }
 
     async preload() {
+        if(this.preloaded) return;
+
         this.world.init();
 
         this.world.preloadNetworkEntities();
@@ -35,6 +39,8 @@ module.exports = class Game {
         this.network.addEnterWorldHandler(() => {
             this.renderer.update();
         });
+
+        this.preloaded = true;
     }
 
     getNetworkEntityPooling() {
