@@ -1,11 +1,12 @@
 'use strict';
 
 const { PACKET } = require('../../Enumerations');
-
 const { WebSocket } = require('ws');
 
 const BinCodec = require('./Codec');
 const EventEmitter = require('events');
+
+const { getRandomUserAgent } = require('../../Utilities/randomUserAgent');
 
 module.exports = class BinNetworkAdapter {
     constructor(currentGame) {
@@ -57,9 +58,12 @@ module.exports = class BinNetworkAdapter {
 
         this.socket = new WebSocket(`wss://${options.hostname}`, {
             headers: {
+                'Accept-Encoding': 'gzip, deflate, br',
+                'Accept-Language': 'en-US,en;q=0.9',
+                'Cache-Control': 'no-cache',
                 Origin: "https://zombs.io",
                 Host: options.hostname,
-                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+                'User-Agent': getRandomUserAgent()
             }
         });
 
