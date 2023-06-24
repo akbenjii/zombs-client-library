@@ -51,20 +51,22 @@ module.exports = class NetworkAdapter {
         });
     }
 
-    connect(options) {
+    connect(serverId) {
         if(!this.currentGame.preloaded) throw new Error('[FATAL] please asynchronously call Game.prototype.preload before trying to connect');
-        this.connectionOptions = options;
+        this.connectionOptions = this.currentGame.servers[serverId];
+
+        if(!this.connectionOptions) throw new Error('[FATAL] couldn\'t load servers.');
 
         this.connected = false;
         this.connecting = true;
 
-        this.socket = new WebSocket(`wss://${options.hostname}`, {
+        this.socket = new WebSocket(`wss://${this.connectionOptions.hostname}`, {
             headers: {
                 'Accept-Encoding': 'gzip, deflate, br',
                 'Accept-Language': 'en-US,en;q=0.9',
                 'Cache-Control': 'no-cache',
                 Origin: "https://zombs.io",
-                Host: options.hostname,
+                Host: this.connectionOptions.hostname,
                 'User-Agent': getRandomUserAgent()
             }
         });

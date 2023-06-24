@@ -6,6 +6,7 @@ const NetworkAdapter = require('./Network/NetworkAdapter');
 const Metrics = require('./Metrics/Metrics');
 
 const _WebAssembly = require('./WebAssembly/_WebAssembly');
+const {fetchServers} = require('../Utilities/fetchServers');
 
 module.exports = class Game {
     constructor(config) {
@@ -27,6 +28,7 @@ module.exports = class Game {
 
     async preload() {
         if(this.preloaded) return;
+        this.servers = await fetchServers();
 
         this.world.init();
 
