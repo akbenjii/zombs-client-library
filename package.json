@@ -1,6 +1,28 @@
 {
   "name": "zombs-client-library",
   "version": "1.0.0",
+  "description": "A comprehensive Node.js library for interacting with the zombs.io game server. It provides a high-level API for easily connecting to the server, managing game sessions, and performing various actions in the game.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akbenjii/zombs-client-library.git"
+  },
+  "keywords": [
+    "zombs.io",
+    "game",
+    "api",
+    "nodejs",
+    "client"
+  ],
+  "author": "benjiszn <akbenjiidev@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/akbenjii/zombs-client-library/issues"
+  },
+  "homepage": "https://github.com/akbenjii/zombs-client-library/#readme",
   "dependencies": {
     "bytebuffer": "^5.0.1",
     "jsdom": "^22.1.0",
