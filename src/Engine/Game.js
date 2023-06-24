@@ -5,11 +5,12 @@ const Renderer = require('./Renderer/Renderer');
 const BinNetworkAdapter = require('./Network/NetworkAdapter');
 const Metrics = require('./Metrics/Metrics');
 
-const wasmSolver = require('../wasmSolver');
+const _WebAssembly = require('./WebAssembly/_WebAssembly');
 
 module.exports = class Game {
     constructor(config) {
         if (!config.username) throw new Error('Please provide a username.');
+        this.config = config;
 
         this.group = null;
 
@@ -28,8 +29,8 @@ module.exports = class Game {
         this.world.preloadNetworkEntities();
         this.world.preloadModelEntities();
 
-        this.wasmmer = new wasmSolver();
-        await this.wasmmer.init();
+        this._WebAssembly = new _WebAssembly(this);
+        await this._WebAssembly.init();
     }
 
     getNetworkEntityPooling() {

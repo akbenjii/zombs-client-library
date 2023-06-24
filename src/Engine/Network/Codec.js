@@ -83,31 +83,34 @@ module.exports = class BinCodec {
     }
 
     encodeEnterWorld2(buffer) {
-        const BlendField = this.currentGame.wasmmer._MakeBlendField(187, 22);
+        const BlendField = this.currentGame._WebAssembly._MakeBlendField(187, 22);
 
         for (let i = 0; i < 16; i++)
-            buffer.writeUint8(this.currentGame.wasmmer.HEAPU8[BlendField + i]);
+            buffer.writeUint8(this.currentGame._WebAssembly.HEAPU8[BlendField + i]);
+
+        this.currentGame._WebAssembly.destroy();
+        this.currentGame._WebAssembly = null;
     }
 
     decodePreEnterWorldResponse(buffer) {
-        this.currentGame.wasmmer._MakeBlendField(24, 132);
+        this.currentGame._WebAssembly._MakeBlendField(24, 132);
 
-        let BlendField = this.currentGame.wasmmer._MakeBlendField(228, buffer.remaining());
+        let BlendField = this.currentGame._WebAssembly._MakeBlendField(228, buffer.remaining());
 
         for (let i = 0; buffer.remaining();) {
-            this.currentGame.wasmmer.HEAPU8[BlendField + i] = buffer.readUint8();
+            this.currentGame._WebAssembly.HEAPU8[BlendField + i] = buffer.readUint8();
             i++;
         }
 
-        this.currentGame.wasmmer._MakeBlendField(172, 36);
+        this.currentGame._WebAssembly._MakeBlendField(172, 36);
 
-        BlendField = this.currentGame.wasmmer._MakeBlendField(4, 152);
+        BlendField = this.currentGame._WebAssembly._MakeBlendField(4, 152);
 
         const extra = new ArrayBuffer(64);
         const extraData = new Uint8Array(extra);
 
         for (let i = 0; i < 64; i++)
-            extraData[i] = this.currentGame.wasmmer.HEAPU8[BlendField + i];
+            extraData[i] = this.currentGame._WebAssembly.HEAPU8[BlendField + i];
 
         return {extra};
     }
