@@ -71,6 +71,7 @@ module.exports = Object.freeze({
     },
     LOGGING: {
         NO_PACKET: ['debug', 'info', 'warn', 'error'],
-        ALL: ['debug', 'info', 'warn', 'error', 'incoming', 'outgoing']
+        ALL: ['debug', 'info', 'warn', 'error', 'incoming', 'outgoing'],
+        NONE: []
     }
 });
