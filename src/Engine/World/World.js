@@ -169,19 +169,6 @@ module.exports = class World {
     }
 
     removeEntity(uid) {
-        const entity = this.entities[uid];
-        const model = entity.currentModel;
-
-        if (this.currentGame.getModelEntityPooling(model.modelName)) {
-            model.reset();
-            this.modelEntityPool[model.modelName].push(model);
-        }
-
-        if (this.currentGame.getNetworkEntityPooling()) {
-            entity.reset();
-            this.networkEntityPool.push(entity);
-        }
-
         delete this.entities[uid];
     }
 
