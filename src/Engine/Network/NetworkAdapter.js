@@ -29,6 +29,7 @@ module.exports = class NetworkAdapter {
 
         this.emitter.on('connected', event => {
             //logger.debug('Successfully connected to Websocket: ', event);
+
             this.connecting = false;
             this.connected = true;
         });
@@ -38,16 +39,6 @@ module.exports = class NetworkAdapter {
 
             this.connecting = false;
             this.connected = false;
-
-            //if (currentGame.world.getInWorld()) {
-            //    setTimeout(this.reconnect.bind(this), 1000);
-            //} else if (!currentGame.world.getInWorld() && this.connectionOptions.fallbackPort) {
-            //    var fallbackPort = this.connectionOptions.fallbackPort;
-            //    delete this.connectionOptions.fallbackPort;
-            //    //logger.debug('Switching to fallback port: %d', fallbackPort);
-            //    this.connectionOptions.port = fallbackPort;
-            //    this.reconnect();
-            //}
         });
     }
 
@@ -85,14 +76,10 @@ module.exports = class NetworkAdapter {
     }
 
     disconnect() {
+        this.emitter.removeAllListeners();
         this.socket.close();
 
         this.socket = null;
-    }
-
-    reconnect() {
-        //logger.debug('Attempting to reconnect...', this.connectionOptions);
-        return this.connect(this.connectionOptions);
     }
 
     getPing() {
@@ -103,6 +90,7 @@ module.exports = class NetworkAdapter {
         if (!this.connected) {
             return;
         }
+
         this.socket.send(this.codec.encode(event, data));
     }
 
