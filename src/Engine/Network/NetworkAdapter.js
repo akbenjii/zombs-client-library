@@ -35,7 +35,7 @@ module.exports = class NetworkAdapter {
         });
 
         this.emitter.on('close', event => {
-            this.currentGame.logger && this.currentGame.logger.debug(`[${this.currentGame.config.username}] Websocket connection has been closed`);
+            this.currentGame.logger && this.currentGame.logger.warn(`[${this.currentGame.config.username}] Websocket connection has been closed`);
 
             this.connecting = false;
             this.connected = false;

@@ -70,8 +70,11 @@ module.exports = Object.freeze({
         9: 'PACKET_RPC'
     },
     LOGGING: {
-        NO_PACKET: ['debug', 'info', 'warn', 'error'],
         ALL: ['debug', 'info', 'warn', 'error', 'incoming', 'outgoing'],
-        NONE: []
+        NONE: [],
+        DEFAULT: ['info', 'warn', 'error'],
+        DEBUG: ['info', 'debug', 'warn', 'error'],
+        PACKET_ONLY: ['incoming', 'outgoing'],
+        NO_PACKET: ['info', 'warn', 'error'],
     }
 });
