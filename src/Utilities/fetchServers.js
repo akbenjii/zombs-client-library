@@ -7,7 +7,7 @@ let serversCache, serverCache = {};
 
 exports.fetchServers = () => {
     return new Promise((resolve, reject) => {
-        if(serversCache) return resolve(serversCache);
+        if (serversCache) return resolve(serversCache);
 
         https.get(endpoint, (res) => {
             let data = '';
@@ -40,7 +40,7 @@ exports.fetchServers = () => {
 
 exports.fetchServer = serverId => {
     return new Promise((resolve, reject) => {
-        if(serverCache[serverId]) return resolve(serverCache[serverId]);
+        if (serverCache[serverId]) return resolve(serverCache[serverId]);
 
         https.get(endpoint, (res) => {
             let data = '';
@@ -59,7 +59,7 @@ exports.fetchServer = serverId => {
 
                     const options = serverInfo[serverId];
 
-                    if(options) {
+                    if (options) {
                         serverCache[serverId] = options;
                         resolve(options);
                     } else reject('Couldn\'t fetch server options');

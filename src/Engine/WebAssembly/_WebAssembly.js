@@ -3,7 +3,7 @@
 const fs = require('fs');
 const buffer = fs.readFileSync(require('path').join(__dirname, '../../../bin/zombs_wasm.wasm'));
 
-const { JSDOM } = require('jsdom');
+const {JSDOM} = require('jsdom');
 
 module.exports = class _WebAssembly {
 
@@ -11,19 +11,19 @@ module.exports = class _WebAssembly {
         this.currentGame = currentGame;
         this.decoder = new TextDecoder();
 
-        const { window } = new JSDOM(``, {runScripts: "dangerously", resources: "usable"});
+        const {window} = new JSDOM(``, {runScripts: "dangerously", resources: "usable"});
         this.window = window;
     }
 
     #a_a() {
         let address = this.currentGame.network.connectionOptions.ipAddress;
-        
+
         if (!address) return 0;
         address = address.toString();
-        
+
         const addrByteSize = this.#calculateUtf8ByteSize(address);
         const result = {}
-        
+
         if (!result.bufferSize || result.bufferSize < addrByteSize + 1) {
             if (result.bufferSize) {
                 this._free(result.buffer);
@@ -51,7 +51,8 @@ module.exports = class _WebAssembly {
         return this.window.performance.now();
     }
 
-    #noop() {}
+    #noop() {
+    }
 
     async init() {
         const imports = {
@@ -83,7 +84,7 @@ module.exports = class _WebAssembly {
 
                 this.___wasm_call_ctors();
                 this._main(0, 0);
-                
+
                 resolve();
             });
         });
@@ -101,7 +102,7 @@ module.exports = class _WebAssembly {
     }
 
     destroy() {
-        if(this.window) this.#destroyWindow();
+        if (this.window) this.#destroyWindow();
         this.#destroyHeap();
 
         this.memory = null;
