@@ -19,6 +19,7 @@ module.exports = class Codec {
 
     encode(opcode, data) {
         const buffer = new ByteBuffer(100, true);
+        this.currentGame.logger && this.currentGame.logger.outgoing(`[${PACKET[opcode]}] ${JSON.stringify(data)}`);
 
         switch (opcode) {
             case PACKET.ENTER_WORLD:
@@ -71,6 +72,8 @@ module.exports = class Codec {
         }
 
         decoded.opcode = opcode;
+
+        this.currentGame.logger && this.currentGame.logger.incoming(`[${PACKET[opcode]}] ${JSON.stringify(decoded)}`);
         return decoded;
     }
 
@@ -374,7 +377,7 @@ module.exports = class Codec {
 
     encodeRpc(buffer, packet) {
         if (!(packet.name in this.rpcMapsByName)) {
-            //logger.error(`RPC not in map: ${packet.name}`);
+            this.currentGame.logger && this.currentGame.logger.error(`RPC not in map: ${packet.name}`);
             return;
         }
 

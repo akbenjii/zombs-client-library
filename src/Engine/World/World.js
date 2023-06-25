@@ -31,7 +31,7 @@ module.exports = class World {
     preloadNetworkEntities() {
         if (!this.currentGame.getNetworkEntityPooling()) return;
 
-        //logger.debug('Preloading network entities...');
+        this.currentGame.logger && this.currentGame.logger.debug('Preloading network entities...');
         const bsTick = {
             uid: 0,
             entityClass: null
@@ -49,7 +49,7 @@ module.exports = class World {
         const modelsToPool = this.currentGame.getModelEntityPooling();
         for (const modelName in modelsToPool) {
             const poolSize = modelsToPool[modelName];
-            //logger.debug('Preloading model %s...', modelName);
+            this.currentGame.logger && this.currentGame.logger.debug('Preloading model %s...', modelName);
 
             this.modelEntityPool[modelName] = [];
             for (let i = 0; i < poolSize; i++) {

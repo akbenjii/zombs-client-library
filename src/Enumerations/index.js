@@ -68,5 +68,9 @@ module.exports = Object.freeze({
         6: 'PACKET_ENTER_WORLD2',
         7: 'PACKET_PING',
         9: 'PACKET_RPC'
+    },
+    LOGGING: {
+        NO_PACKET: ['debug', 'info', 'warn', 'error'],
+        ALL: ['debug', 'info', 'warn', 'error', 'incoming', 'outgoing']
     }
 });

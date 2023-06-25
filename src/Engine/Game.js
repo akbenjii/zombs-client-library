@@ -8,12 +8,16 @@ const Metrics = require('./Metrics/Metrics');
 const _WebAssembly = require('./WebAssembly/_WebAssembly');
 const {fetchServers} = require('../Utilities/fetchServers');
 
+const {LOGGING} = require('../Enumerations');
+
 module.exports = class Game {
+    static LOGGING = LOGGING;
+
     constructor(config) {
         if (!config.username) throw new Error('Please provide a username.');
         this.config = config;
 
-        this.group = null;
+        this.group = 0;
 
         this.modelEntityPooling = {};
         this.networkEntityPooling = false;
@@ -24,11 +28,16 @@ module.exports = class Game {
         this.metrics = new Metrics(this);
 
         this.preloaded = false;
+
+        if (config.toLog) {
+            this.logger = require('../Utilities/logger');
+            this.logger.init(config.toLog);
+        }
     }
 
     preload() {
         return new Promise(async resolve => {
-            if(this.preloaded) return;
+            if (this.preloaded) return;
             this.servers = await fetchServers();
 
             this.world.init();

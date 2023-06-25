@@ -1,7 +1,9 @@
 'use strict';
 
 module.exports = class Renderer {
-    constructor() {
+    constructor(currentGame) {
+        this.currentGame = currentGame;
+
         this.tickCallbacks = [];
         this.lastMsElapsed = 0x0;
         this.firstPerformance = null;
@@ -34,7 +36,7 @@ module.exports = class Renderer {
             for (const callback of this.tickCallbacks)
                 callback(msElapsed);
         } catch (e) {
-            //logger.error(`Failed to execute tick callbacks: ${e}`)
+            this.currentGame.logger && this.currentGame.logger.error(`Failed to execute tick callbacks: ${e}`)
             console.log(e.stack)
         }
 

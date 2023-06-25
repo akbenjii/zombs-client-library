@@ -28,14 +28,14 @@ module.exports = class NetworkAdapter {
         this.addPingHandler(this.onPing.bind(this));
 
         this.emitter.on('connected', event => {
-            //logger.debug('Successfully connected to Websocket: ', event);
+            this.currentGame.logger && this.currentGame.logger.debug(`[${this.currentGame.config.username}] Successfully connected to Websocket`);
 
             this.connecting = false;
             this.connected = true;
         });
 
         this.emitter.on('close', event => {
-            //logger.debug('Websocket connection has been closed: ', event);
+            this.currentGame.logger && this.currentGame.logger.debug(`[${this.currentGame.config.username}] Websocket connection has been closed`);
 
             this.connecting = false;
             this.connected = false;
@@ -43,10 +43,10 @@ module.exports = class NetworkAdapter {
     }
 
     connect(serverId) {
-        if(!this.currentGame.preloaded) throw new Error('[FATAL] please asynchronously call Game.prototype.preload before trying to connect');
+        if (!this.currentGame.preloaded) throw new Error('[FATAL] please asynchronously call Game.prototype.preload before trying to connect');
         this.connectionOptions = this.currentGame.servers[serverId];
 
-        if(!this.connectionOptions) throw new Error('[FATAL] couldn\'t load servers.');
+        if (!this.connectionOptions) throw new Error('[FATAL] couldn\'t load servers.');
 
         this.connected = false;
         this.connecting = true;

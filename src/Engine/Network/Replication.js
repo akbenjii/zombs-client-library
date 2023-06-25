@@ -162,7 +162,7 @@ module.exports = class Replication {
         if (this.isRendererPaused()) {
             this.wasRendererJustUnpaused = true;
             this.equalTimes = 0;
-            //logger.debug('Prevented huge delta time %d after render pause', msElapsed);
+            this.currentGame.logger && this.currentGame.logger.debug(`Prevented huge delta time %d after render pause: ${msElapsed}`);
             msElapsed = 0;
         }
 
@@ -191,7 +191,7 @@ module.exports = class Replication {
                 if (this.interpolating) {
                     this.interpolating = false;
                     this.extrapolationIncidents++;
-                    //logger.debug('Extrapolation incident beginning');
+                    this.currentGame.logger && this.currentGame.logger.debug('Extrapolation incident beginning');
                 }
                 this.maxExtrapolationTime = Math.max(this.shiftedGameTime - nextTickStart, this.maxExtrapolationTime);
                 var extrapolationTime = Math.min(this.msInThisTick - this.msPerTick, this.lastMsElapsed);
@@ -210,7 +210,7 @@ module.exports = class Replication {
     onEnterWorld(data) {
         if (!data.allowed) return;
 
-        //logger.debug('Effective tick rate: ' + data.effectiveTickRate);
+        this.currentGame.logger && this.currentGame.logger.debug('Effective tick rate: ' + data.effectiveTickRate);
         const tickRate = data.tickRate;
         this.msPerTick = 1000 / tickRate;
         this.msInThisTick = 0;
@@ -243,11 +243,11 @@ module.exports = class Replication {
         if (!this.receivedFirstTick) {
             this.receivedFirstTick = true;
             this.startTime = new Date();
-            //logger.debug('Initializing replicator...');
-            //logger.debug('Start time: %s', this.startTime);
-            //logger.debug('Tick index: %d', data.tick);
-            //logger.debug('MS per tick: %f', this.msPerTick);
-            //logger.debug('Ping: %fms', this.ping);
+            this.currentGame.logger && this.currentGame.logger.debug('Initializing replicator...');
+            this.currentGame.logger && this.currentGame.logger.debug(`Start time: ${this.startTime}`);
+            this.currentGame.logger && this.currentGame.logger.debug(`Tick index: ${data.tick}`);
+            this.currentGame.logger && this.currentGame.logger.debug(`MS per tick: ${this.msPerTick}`);
+            this.currentGame.logger && this.currentGame.logger.debug(`Ping: ${this.ping}`);
             this.shiftedGameTime = data.tick * this.msPerTick - 90;
             this.startShiftedGameTime = this.shiftedGameTime;
             this.clientTimeResets = 0;
@@ -262,10 +262,10 @@ module.exports = class Replication {
 
             this.ticksDesynced2 = 0;
             if (this.ticksDesynced2 >= 10 || this.wasRendererJustUnpaused) {
-                //logger.debug('Resetting client time');
-                //logger.debug('Difference in client time: %f (%f -> %f)', differenceInClientLag, this.shiftedGameTime, (data.tick * this.msPerTick - 90));
-                //logger.debug('Renderer paused: %s', rendererPaused ? 'true' : 'false');
-                //logger.debug('Renderer just unpaused: %s', this.wasRendererJustUnpaused ? 'true' : 'false');
+                this.currentGame.logger && this.currentGame.logger.debug('Resetting client time');
+                this.currentGame.logger && this.currentGame.logger.debug(`Difference in client time: ${differenceInClientLag} (${this.shiftedGameTime} -> ${(data.tick * this.msPerTick - 90)})`);
+                this.currentGame.logger && this.currentGame.logger.debug(`Renderer paused: ${rendererPaused ? 'true' : 'false'}`);
+                this.currentGame.logger && this.currentGame.logger.debug(`Renderer just unpaused: ${this.wasRendererJustUnpaused ? 'true' : 'false'}`);
                 const last = this.shiftedGameTime;
 
                 this.shiftedGameTime = data.tick * this.msPerTick - 90;

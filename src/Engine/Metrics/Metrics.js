@@ -146,7 +146,7 @@ module.exports = class Metrics {
         try {
             this.currentGame.network.sendRpc(this.metrics);
         } catch (e) {
-            //logger.error('Error while updating metrics ', e);
+            this.currentGame.logger && this.currentGame.logger.error(`Error while updating metrics: ${e}`);
         }
 
         this.msElapsedSinceMetricsSent = 0;
