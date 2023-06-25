@@ -76,5 +76,6 @@ module.exports = Object.freeze({
         DEBUG: ['info', 'debug', 'warn', 'error'],
         PACKET_ONLY: ['incoming', 'outgoing'],
         NO_PACKET: ['info', 'warn', 'error'],
+        DISABLED: 0
     }
 });

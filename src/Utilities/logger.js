@@ -5,8 +5,8 @@ const keepLogs = {
     "info": "1d",
     "warn": "2d",
     "error": "3d",
-    "incoming": "4d",
-    "outgoing": "4d"
+    "incoming": "1d",
+    "outgoing": "1d"
 };
 
 const {createLogger, transports, format, addColors} = require('winston');

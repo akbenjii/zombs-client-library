@@ -15,8 +15,9 @@ module.exports = class Game {
 
     constructor(config) {
         if (!config.username) throw new Error('Please provide a username.');
-        this.config = config;
+        if(!config.logType) config.logType = LOG_TYPE.DISABLED;
 
+        this.config = config;
         this.group = 0;
 
         this.modelEntityPooling = {};
@@ -29,7 +30,7 @@ module.exports = class Game {
 
         this.preloaded = false;
 
-        if (config.logType) {
+        if (config.logType && config.logType !== LOG_TYPE.DISABLED) {
             this.logger = require('../Utilities/logger');
             this.logger.init(config.logType);
         }
