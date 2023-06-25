@@ -26,23 +26,26 @@ module.exports = class Game {
         this.preloaded = false;
     }
 
-    async preload() {
-        if(this.preloaded) return;
-        this.servers = await fetchServers();
+    preload() {
+        return new Promise(async resolve => {
+            if(this.preloaded) return;
+            this.servers = await fetchServers();
 
-        this.world.init();
+            this.world.init();
 
-        this.world.preloadNetworkEntities();
-        this.world.preloadModelEntities();
+            this.world.preloadNetworkEntities();
+            this.world.preloadModelEntities();
 
-        this._WebAssembly = new _WebAssembly(this);
-        await this._WebAssembly.init();
+            this._WebAssembly = new _WebAssembly(this);
+            await this._WebAssembly.init();
 
-        this.network.addEnterWorldHandler(() => {
-            this.renderer.update();
-        });
+            this.network.addEnterWorldHandler(() => {
+                this.renderer.update();
+            });
 
-        this.preloaded = true;
+            this.preloaded = true;
+            resolve();
+        })
     }
 
     getNetworkEntityPooling() {
