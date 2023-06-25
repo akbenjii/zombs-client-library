@@ -8,10 +8,10 @@ const Metrics = require('./Metrics/Metrics');
 const _WebAssembly = require('./WebAssembly/_WebAssembly');
 const {fetchServers} = require('../Utilities/fetchServers');
 
-const {LOGGING} = require('../Enumerations');
+const {LOG_TYPE} = require('../Enumerations');
 
 module.exports = class Game {
-    static LOGGING = LOGGING;
+    static LOG_TYPE = LOG_TYPE;
 
     constructor(config) {
         if (!config.username) throw new Error('Please provide a username.');
@@ -29,9 +29,9 @@ module.exports = class Game {
 
         this.preloaded = false;
 
-        if (config.toLog) {
+        if (config.logType) {
             this.logger = require('../Utilities/logger');
-            this.logger.init(config.toLog);
+            this.logger.init(config.logType);
         }
     }
 

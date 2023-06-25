@@ -69,7 +69,7 @@ module.exports = Object.freeze({
         7: 'PACKET_PING',
         9: 'PACKET_RPC'
     },
-    LOGGING: {
+    LOG_TYPE: {
         ALL: ['debug', 'info', 'warn', 'error', 'incoming', 'outgoing'],
         NONE: [],
         DEFAULT: ['info', 'warn', 'error'],
