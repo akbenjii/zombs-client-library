@@ -51,7 +51,7 @@ module.exports = class NetworkAdapter {
         this.connected = false;
         this.connecting = true;
 
-        this.socket = new WebSocket(`wss://${this.connectionOptions.hostname}`, {
+        const options = {
             headers: {
                 'Accept-Encoding': 'gzip, deflate, br',
                 'Accept-Language': 'en-US,en;q=0.9',
@@ -60,8 +60,13 @@ module.exports = class NetworkAdapter {
                 Host: this.connectionOptions.hostname,
                 'User-Agent': getRandomUserAgent()
             }
-        });
+        }
 
+        if (this.currentGame.config.agent && typeof this.currentGame.config.agent === 'object') {
+            options.agent = this.currentGame.config.agent;
+        }
+
+        this.socket = new WebSocket(`wss://${this.connectionOptions.hostname}`, options);
         this.bindEventListeners();
     }
 
