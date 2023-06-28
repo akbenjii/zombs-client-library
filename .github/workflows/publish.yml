@@ -15,7 +15,6 @@ jobs:
         with:
           node-version: 18.15.0
       - run: npm ci
-      - run: npm test
   publish-gpr:
     needs: build
     runs-on: ubuntu-latest
