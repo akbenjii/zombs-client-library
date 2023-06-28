@@ -4,7 +4,6 @@ const World = require('./World/World');
 const Renderer = require('./Renderer/Renderer');
 const NetworkAdapter = require('./Network/NetworkAdapter');
 const Metrics = require('./Metrics/Metrics');
-const Codec = require('./Network/Codec');
 
 const _WebAssembly = require('./WebAssembly/_WebAssembly');
 const {fetchServers} = require('../Utilities/fetchServers');
@@ -13,7 +12,7 @@ const {LOG_TYPE} = require('../Enumerations');
 
 module.exports = class Game {
     static LOG_TYPE = LOG_TYPE;
-    static Codec
+    static Codec = require('./Network/Codec');
 
     constructor(config) {
         if (!config.username) throw new Error('Please provide a username.');
