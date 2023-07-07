@@ -16,7 +16,7 @@ module.exports = class Game {
 
     constructor(config) {
         if (!config.username) throw new Error('Please provide a username.');
-        if(!config.logType) config.logType = LOG_TYPE.DISABLED;
+        if(!config.logType) config.logType = LOG_TYPE.DEFAULT;
 
         this.config = config;
         this.group = 0;
