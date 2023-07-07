@@ -20,14 +20,14 @@ module.exports = class Renderer {
     }
 
     update() {
-        if (!this.firsrPerformance) {
-            this.firsrPerformance = performance.now();
+        if (!this.firstPerformance) {
+            this.firstPerformance = performance.now();
             setImmediate(this.update.bind(this));
             return;
         }
 
         const currentPerformance = performance.now();
-        const performanceDelta = currentPerformance - this.firsrPerformance;
+        const performanceDelta = currentPerformance - this.firstPerformance;
         const msElapsed = performanceDelta - this.lastMsElapsed;
 
         this.lastMsElapsed = performanceDelta;
