@@ -1,6 +1,6 @@
 {
   "name": "@akbenjii/zombs-client-library",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A comprehensive Node.js library for interacting with the zombs.io game server. It provides a high-level API for easily connecting to the server, managing game sessions, and performing various actions in the game.",
   "main": "index.js",
   "scripts": {

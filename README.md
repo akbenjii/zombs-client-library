@@ -18,7 +18,7 @@ the game server and the client.
 You can install the library via npm:
 
 ```shell
-npm install @akbenjii/zombs-client-library
+npm install https://github.com/akbenjii/zombs-client-library
 ```
 
 ## Usage
