@@ -35,6 +35,8 @@ module.exports = class Game {
             this.logger = require('../Utilities/logger');
             this.logger.init(config.logType);
         }
+
+        this.currentGame = this;
     }
 
     preload() {
