@@ -75,4 +75,4 @@ const client = new ZombsClient({
 })();
 ```
 
-This is just a basic example, and there are all methods the `ZombsClient` class can be used interchangeably with web-scripts.
+This is just a basic example, and methods on the `ZombsClient` class can be used interchangeably with web-scripts.

@@ -185,9 +185,9 @@ module.exports = class NetworkAdapter {
         });
     }
 
-    addRpcHandler(rpc, callback) {
+    addRpcHandler(rpcName, callback) {
         this.addPacketHandler(PACKET.RPC, rpc => {
-            if (rpc === rpc.name)
+            if (rpcName === rpc.name)
                 return callback(rpc.response);
         });
     }
